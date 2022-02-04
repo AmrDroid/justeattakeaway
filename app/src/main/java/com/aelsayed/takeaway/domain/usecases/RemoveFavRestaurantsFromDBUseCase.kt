@@ -19,10 +19,12 @@ class RemoveFavRestaurantsFromDBUseCase(
         withContext(defaultDispatcher)
         {
             try {
-                withContext(Dispatchers.Main)
-                {
-                    emit("removed.")
-                }
+                restaurantsRepository.removeFavRestaurant(name)
+                    withContext(Dispatchers.Main)
+                    {
+                        emit("removed.")
+                    }
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("Error occurred: ", traceErrorException(e).message.toString())

@@ -45,7 +45,6 @@ dependencies {
     implementation appDependencies.lifecycleExtensions
     implementation appDependencies.lifecycleViewModel
     implementation appDependencies.lifeCycleRuntime
-    implementation appDependencies.creditCard
 
     //retrofit
     api dataDependencies.retrofit
