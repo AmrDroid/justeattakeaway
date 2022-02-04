@@ -3,9 +3,7 @@ package com.aelsayed.takeaway.domain.usecases
 
 import android.util.Log
 import com.aelsayed.takeaway.domain.base.traceErrorException
-import com.aelsayed.takeaway.domain.converters.toData
 import com.aelsayed.takeaway.domain.repository.IRestaurantsRepository
-import com.aelsayed.takeaway.presentation.model.RestaurantPresentation
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -21,11 +19,9 @@ class RemoveFavRestaurantsFromDBUseCase(
         withContext(defaultDispatcher)
         {
             try {
-                restaurantsRepository.removeFavRestaurant(name).let {
-                    withContext(Dispatchers.Main)
-                    {
-                        emit("removed.")
-                    }
+                withContext(Dispatchers.Main)
+                {
+                    emit("removed.")
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
