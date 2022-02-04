@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">JustEatTakeAwayExercise</string>
+    <string name="toolbarTitle">Browse restaurants</string>
+    <string name="minimum_order_pattern">Minimum order value: %d</string>
+    <string name="loader_text">Matching the best for you</string>
+    <string name="open">open</string>
+    <string name="order_ahead">order ahead</string>
+    <string name="closed">closed</string>
+    <string name="sort_by_open_state">Sort By Open State</string>
+    <string name="sort_by_distance">Sort By Distance</string>
+    <string name="zero">0.0</string>
+    <string name="deliverycosts">deliveryCosts :-</string>
+    <string name="averageproductprice">averageProductPrice :-</string>
+    <string name="popularity">popularity :-</string>
+    <string name="distance">distance :-</string>
+    <string name="ratingaverage">ratingAverage :-</string>
+    <string name="newest">newest :-</string>
+    <string name="best_match">Best Match :-</string>
+    <string name="fav_image">Fav Image</string>
+</resources>

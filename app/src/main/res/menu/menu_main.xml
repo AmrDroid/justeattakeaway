@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.aelsayed.takeaway.presentation.activities.MainActivity">
+
+    <item
+        android:id="@+id/sortByOpenState"
+        android:title="@string/sort_by_open_state" />
+
+
+    <item
+        android:id="@+id/sortByDistance"
+        android:title="@string/sort_by_distance" />
+
+</menu>
