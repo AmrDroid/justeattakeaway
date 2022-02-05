@@ -14,7 +14,7 @@ data class RestaurantPresentation(
     var averageProductPrice: Int? = null,
     var deliveryCosts: Int? = null,
     var minCost: Int? = null,
-    var isFav: Boolean? = null
+    var isFav: Boolean = false
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -28,7 +28,7 @@ data class RestaurantPresentation(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Boolean,
+        parcel.readValue(Int::class.java.classLoader) as Boolean,
     )
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

@@ -6,7 +6,8 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.aelsayed.takeaway.presentation.model.RestaurantItemClickListener
 import com.aelsayed.takeaway.presentation.model.RestaurantPresentation
 import takeaway.R
@@ -15,7 +16,8 @@ import takeaway.R
 class RestaurantAdapter(
     private var restaurantItemList: List<RestaurantPresentation>,
     private val restaurantItemClickListener: RestaurantItemClickListener
-) : RecyclerView.Adapter<RestaurantItemRecyclerViewHolder>() {
+) : ListAdapter<RestaurantPresentation, RestaurantItemRecyclerViewHolder>(RestaurantsDifUtils()) {
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -63,6 +65,23 @@ class RestaurantAdapter(
 
     override fun getItemCount(): Int {
         return restaurantItemList.size
+    }
+
+    class RestaurantsDifUtils : DiffUtil.ItemCallback<RestaurantPresentation>() {
+        override fun areItemsTheSame(
+            oldItem: RestaurantPresentation,
+            newItem: RestaurantPresentation
+        ): Boolean {
+            return oldItem.name == newItem.name
+        }
+
+        override fun areContentsTheSame(
+            oldItem: RestaurantPresentation,
+            newItem: RestaurantPresentation
+        ): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
 }

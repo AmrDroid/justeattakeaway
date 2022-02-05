@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity(), RestaurantItemClickListener {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-
                 launch {
                     restaurantsViewModel.favRestaurantsState.collect {
                         when (it) {
@@ -110,6 +109,7 @@ class MainActivity : AppCompatActivity(), RestaurantItemClickListener {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                restaurantItem.isFav = !restaurantItem.isFav
                 if (!isSelected)
                     restaurantsViewModel.removeFavRestaurantFromDB(restaurantItem.name)
                 else
@@ -135,7 +135,6 @@ class MainActivity : AppCompatActivity(), RestaurantItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.sortByOpenState -> {
-
                 adapter.setData(sortByState(restaurants))
                 true
             }
@@ -151,6 +150,7 @@ class MainActivity : AppCompatActivity(), RestaurantItemClickListener {
 
     private fun sortByState(restaurants: List<RestaurantPresentation>): List<RestaurantPresentation> {
         val restaurantsGrouped = restaurants.groupBy({ it.status }, { it })
+
         val sortedList = ArrayList<RestaurantPresentation>()
         restaurantsGrouped[getString(R.string.open)]
             ?.let { sortedList.addAll(it.toList()) }
