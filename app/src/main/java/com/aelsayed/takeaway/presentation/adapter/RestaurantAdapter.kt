@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.aelsayed.takeaway.presentation.model.RestaurantItemClickListener
 import com.aelsayed.takeaway.presentation.model.RestaurantPresentation
 import takeaway.R
@@ -16,7 +16,7 @@ import takeaway.R
 class RestaurantAdapter(
     private var restaurantItemList: List<RestaurantPresentation>,
     private val restaurantItemClickListener: RestaurantItemClickListener
-) : ListAdapter<RestaurantPresentation, RestaurantItemRecyclerViewHolder>(RestaurantsDifUtils()) {
+) : RecyclerView.Adapter<RestaurantItemRecyclerViewHolder>() {
 
 
     override fun onCreateViewHolder(
@@ -58,28 +58,34 @@ class RestaurantAdapter(
         return String.format(context.getString(R.string.minimum_order_pattern), minimumOrderAmount)
     }
 
-    fun setData(restaurantsList: List<RestaurantPresentation>) {
-        restaurantItemList = restaurantsList
-        notifyDataSetChanged()
+    fun setData(newList: List<RestaurantPresentation>) {
+
+        val diffResult : DiffUtil.DiffResult = DiffUtil.calculateDiff(RestaurantsDifUtilsCallBack(restaurantItemList,newList))
+        restaurantItemList=newList
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemCount(): Int {
         return restaurantItemList.size
     }
 
-    class RestaurantsDifUtils : DiffUtil.ItemCallback<RestaurantPresentation>() {
-        override fun areItemsTheSame(
-            oldItem: RestaurantPresentation,
-            newItem: RestaurantPresentation
-        ): Boolean {
-            return oldItem.name == newItem.name
+    class RestaurantsDifUtilsCallBack(
+        private var oldList: List<RestaurantPresentation>,
+        private var newList: List<RestaurantPresentation>
+    ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+
+
+        override fun getNewListSize()= newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].name.equals(newList[newItemPosition].name)
         }
 
-        override fun areContentsTheSame(
-            oldItem: RestaurantPresentation,
-            newItem: RestaurantPresentation
-        ): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].equals(newList[newItemPosition])
+
         }
 
     }

@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity(), RestaurantItemClickListener {
                 true
             }
             R.id.sortByDistance -> {
+
                 adapter.setData(restaurants.sortedBy {
                     it.distance
                 })

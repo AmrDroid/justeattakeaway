@@ -30,6 +30,7 @@ data class RestaurantPresentation(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as Boolean,
     )
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(status)
@@ -46,6 +47,28 @@ data class RestaurantPresentation(
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    override fun equals(other: Any?): Boolean {
+
+        if (javaClass != other?.javaClass)
+            return false
+
+        other as RestaurantPresentation
+
+        if (name != other.name) return false
+        if (status != other.status) return false
+        if (bestMatch != other.bestMatch) return false
+        if (newest != other.newest) return false
+        if (ratingAverage != other.ratingAverage) return false
+        if (distance != other.distance) return false
+        if (popularity != other.popularity) return false
+        if (averageProductPrice != other.averageProductPrice) return false
+        if (deliveryCosts != other.deliveryCosts) return false
+        if (isFav != other.isFav) return false
+        if (minCost != other.minCost) return false
+
+        return true
     }
 
     companion object CREATOR : Parcelable.Creator<RestaurantPresentation> {
